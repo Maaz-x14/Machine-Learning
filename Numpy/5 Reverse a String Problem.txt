@@ -1,0 +1,33 @@
+5. Reverse a String
+Problem: Write a function to reverse a given string using recursion.
+Hint: Reverse a string by swapping the first character with the last, and then recursively reverse the substring between them.
+6. Check if a String is a Palindrome
+Problem: Write a function to check if a given string is a palindrome.
+Hint: A string is a palindrome if the first and last characters are the same, and the substring between them is also a palindrome.
+7. Binary Search
+Problem: Implement a recursive binary search function that returns the position of a target value within a sorted array.
+Hint: Compare the middle element with the target; if they are equal, return the index. If the target is smaller, search the left half; otherwise, search the right half.
+8. Tower of Hanoi
+Problem: Write a function to solve the Tower of Hanoi problem for n disks.
+Hint: The goal is to move n disks from one peg to another using an auxiliary peg, following specific rules.
+9. Permutations of a String
+Problem: Write a function to generate all permutations of a given string.
+Hint: To generate permutations, fix each character at the first position and recursively find permutations of the remaining characters.
+10. Sum of an Array
+Problem: Write a function to calculate the sum of all elements in an array using recursion.
+Hint: The sum of the array can be calculated as sum = first_element + sum_of_rest_of_array. The base case is when the array is empty.
+11. Greatest Common Divisor (GCD)
+Problem: Write a function to find the GCD of two numbers using recursion.
+Hint: Use the Euclidean algorithm: GCD(a, b) = GCD(b, a % b) with the base case GCD(a, 0) = a.
+12. Count the Number of Ways to Climb Stairs
+Problem: If a person can climb 1 or 2 steps at a time, write a function to find the number of ways to reach the top of a staircase with n steps.
+Hint: The problem can be broken down into smaller subproblems: ways(n) = ways(n-1) + ways(n-2) with base cases for n = 1 and n = 0.
+13. Merge Sort
+Problem: Implement the merge sort algorithm using recursion.
+Hint: Divide the array into two halves, recursively sort each half, and then merge the two sorted halves.
+14. N-Queens Problem
+Problem: Write a function to solve the N-Queens problem, where n queens must be placed on an n x n chessboard so that no two queens threaten each other.
+Hint: Use recursion to place queens one by one in different rows.
+15. Print all Subsequences of a String
+Problem: Write a function to print all possible subsequences of a given string.
+Hint: For each character in the string, you can either include it in the subsequence or exclude it, and recursively generate all subsequences.

@@ -1,0 +1,177 @@
+In Java, `Map` is an interface that represents a data structure that stores key-value pairs. It provides methods for adding, retrieving, removing, and manipulating these pairs. The `Map` interface is part of the `java.util` package and is implemented by several classes, including `HashMap`, `Hashtable`, `TreeMap`, and `LinkedHashMap`.
+
+### 1. `Map` Interface
+- **Definition**: `Map<K, V>` is a generic interface where `K` represents the type of keys and `V` represents the type of values.
+- **Key Characteristics**:
+  - Keys are unique; each key maps to exactly one value.
+  - A `Map` does not allow duplicate keys.
+  - A key can map to `null` values, depending on the implementation (e.g., `HashMap` allows `null` keys and values).
+
+### Key Methods of `Map`
+- `V put(K key, V value)`: Associates the specified value with the specified key.
+- `V get(Object key)`: Returns the value to which the specified key is mapped, or `null` if the map contains no mapping for the key.
+- `boolean containsKey(Object key)`: Returns `true` if this map contains a mapping for the specified key.
+- `boolean containsValue(Object value)`: Returns `true` if this map maps one or more keys to the specified value.
+- `V remove(Object key)`: Removes the mapping for a key from this map if it is present.
+- `Set<K> keySet()`: Returns a `Set` view of the keys contained in this map.
+- `Collection<V> values()`: Returns a `Collection` view of the values contained in this map.
+- `Set<Map.Entry<K, V>> entrySet()`: Returns a `Set` view of the mappings contained in this map.
+
+### Examples of `Map` Implementations
+
+#### 2. `HashMap`
+- **Definition**: `HashMap` is a part of the Java Collections Framework. It implements the `Map` interface and is backed by a hash table.
+- **Characteristics**:
+  - Stores key-value pairs.
+  - Allows `null` keys and values.
+  - Does not guarantee any specific order of the elements.
+  - Not synchronized, so it's not thread-safe. Use `Collections.synchronizedMap` to make it synchronized.
+  - Average time complexity for operations like `put`, `get`, `remove` is \(O(1)\) due to hashing.
+  
+#### Basic Example of `HashMap`
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        // Creating a HashMap
+        Map<String, Integer> map = new HashMap<>();
+
+        // Adding key-value pairs
+        map.put("Apple", 3);
+        map.put("Banana", 2);
+        map.put("Orange", 5);
+
+        // Retrieving a value
+        System.out.println("Apple count: " + map.get("Apple")); // Output: 3
+
+        // Checking if a key exists
+        System.out.println("Contains key 'Banana'? " + map.containsKey("Banana")); // Output: true
+
+        // Removing a key-value pair
+        map.remove("Banana");
+        System.out.println("Contains key 'Banana' after removal? " + map.containsKey("Banana")); // Output: false
+
+        // Iterating over keys and values
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+```
+
+#### 3. `Hashtable`
+- **Definition**: `Hashtable` is a legacy class in Java that implements a hash table, which maps keys to values.
+- **Characteristics**:
+  - Synchronized, so it is thread-safe.
+  - Does not allow `null` keys or values.
+  - Older class compared to `HashMap` and generally less preferred due to synchronization overhead.
+  - Operations like `put`, `get`, and `remove` are slower than `HashMap` due to synchronization.
+
+#### Basic Example of `Hashtable`
+```java
+import java.util.Hashtable;
+import java.util.Map;
+
+public class HashtableExample {
+    public static void main(String[] args) {
+        // Creating a Hashtable
+        Map<String, Integer> table = new Hashtable<>();
+
+        // Adding key-value pairs
+        table.put("Apple", 3);
+        table.put("Banana", 2);
+        table.put("Orange", 5);
+
+        // Retrieving a value
+        System.out.println("Apple count: " + table.get("Apple")); // Output: 3
+
+        // Checking if a key exists
+        System.out.println("Contains key 'Banana'? " + table.containsKey("Banana")); // Output: true
+
+        // Removing a key-value pair
+        table.remove("Banana");
+        System.out.println("Contains key 'Banana' after removal? " + table.containsKey("Banana")); // Output: false
+
+        // Iterating over keys and values
+        for (Map.Entry<String, Integer> entry : table.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+```
+
+#### 4. Key Differences Between `HashMap` and `Hashtable`
+- **Thread Safety**: `HashMap` is not synchronized, while `Hashtable` is synchronized.
+- **Null Keys/Values**: `HashMap` allows `null` keys and values; `Hashtable` does not.
+- **Performance**: `HashMap` is generally faster due to the lack of synchronization.
+- **Legacy Status**: `Hashtable` is considered a legacy class and is less commonly used in modern Java applications.
+
+### Additional Examples of `HashMap`
+
+#### Example: Counting Word Frequency
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class WordFrequency {
+    public static void main(String[] args) {
+        String text = "apple banana apple orange banana apple";
+        String[] words = text.split(" ");
+        Map<String, Integer> wordCount = new HashMap<>();
+
+        for (String word : words) {
+            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+        }
+
+        // Display the word frequencies
+        for (Map.Entry<String, Integer> entry : wordCount.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+```
+Output:
+```
+apple: 3
+banana: 2
+orange: 1
+```
+
+### Example: Caching Results
+You can use a `HashMap` to cache results of expensive operations for better performance.
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class FibonacciCache {
+    private Map<Integer, Integer> cache = new HashMap<>();
+
+    public int fibonacci(int n) {
+        if (n <= 1) return n;
+
+        // Check if result is already cached
+        if (cache.containsKey(n)) {
+            return cache.get(n);
+        }
+
+        // Compute the result and store it in the cache
+        int result = fibonacci(n - 1) + fibonacci(n - 2);
+        cache.put(n, result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        FibonacciCache fibCache = new FibonacciCache();
+        System.out.println("Fibonacci of 10: " + fibCache.fibonacci(10)); // Output: 55
+    }
+}
+```
+
+### Conclusion
+- **`Map` Interface**: Provides a structure to store key-value pairs.
+- **`HashMap`**: A powerful, non-synchronized map that allows `null` keys and values.
+- **`Hashtable`**: A synchronized, legacy map that does not allow `null` keys or values.
+
+If you have any specific questions or need more examples, feel free to ask!
